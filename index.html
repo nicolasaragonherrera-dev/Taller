@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Garaje Masti Motor — Taller mecánico en Errenteria</title>
+  <meta name="description" content="Taller mecánico en el polígono Masti-Loidi, Errenteria (Gipuzkoa). Mecánica general, electricidad, electrónica y diagnosis, inyección electrónica y aire acondicionado. Reserva cita o llama al 943 01 09 50.">
+  <meta name="theme-color" content="#ECEAE4">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Garaje Masti Motor — Taller mecánico en Errenteria">
+  <meta property="og:description" content="Encontramos la avería. La arreglamos. Mecánica, electrónica y diagnosis en Masti-Loidi 15, Errenteria.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "Garaje Masti Motor",
+    "telephone": "+34943010950",
+    "email": "mastimotor@yahoo.es",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Polígono Masti-Loidi, 15",
+      "addressLocality": "Errenteria",
+      "postalCode": "20100",
+      "addressRegion": "Gipuzkoa",
+      "addressCountry": "ES"
+    },
+    "areaServed": ["Errenteria", "Oarsoaldea", "Pasaia", "Oiartzun", "Lezo", "Donostia"],
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "13:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "15:00", "closes": "19:00" }
+    ],
+    "makesOffer": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mecánica general" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electricidad del automóvil" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electrónica y diagnosis" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Inyección electrónica" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Aire acondicionado" } }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="hdr" data-hdr>
+    <div class="hdr__in">
+      <a class="logo" href="#top" aria-label="Garaje Masti Motor, inicio">
+        <span class="logo__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M2 22 L8 22 L11 10 L15 26 L18 14 L21 22 L30 22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        </span>
+        <span class="logo__word">Masti<b>Motor</b></span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#metodo">Método</a>
+        <a href="#taller">Taller</a>
+        <a href="#horario">Horario</a>
+      </nav>
+
+      <div class="hdr__cta">
+        <a class="hdr__tel" href="tel:+34943010950"><span class="mono">T.</span> 943 01 09 50</a>
+        <a class="btn btn--primary btn--sm" href="#reserva" data-magnet>Reservar cita</a>
+      </div>
+
+      <a class="hdr__icon hdr__icon--call" href="tel:+34943010950" aria-label="Llamar al 943 01 09 50">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="currentColor"/></svg>
+      </a>
+      <button class="hdr__icon hdr__menu" type="button" aria-expanded="false" aria-controls="menu" data-menu-btn>
+        <span class="sr">Menú</span>
+        <span class="burger" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+    <div class="hdr__progress" aria-hidden="true"><span data-progress></span></div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="menu" id="menu" hidden data-menu>
+    <nav aria-label="Menú móvil">
+      <a href="#servicios"><span class="mono">01</span>Servicios</a>
+      <a href="#metodo"><span class="mono">02</span>Método</a>
+      <a href="#taller"><span class="mono">03</span>Taller</a>
+      <a href="#horario"><span class="mono">04</span>Horario</a>
+      <a href="#reserva"><span class="mono">05</span>Reservar cita</a>
+    </nav>
+    <div class="menu__foot">
+      <a class="btn btn--primary btn--block" href="#reserva">Reservar cita</a>
+      <a class="btn btn--ghost btn--block" href="tel:+34943010950">Llamar · 943 01 09 50</a>
+      <p class="mono">Pol. Masti-Loidi 15 · Errenteria</p>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__meta wrap">
+        <p class="mono">Garaje Masti Motor <span class="dim">— Taller mecánico</span></p>
+        <p class="mono hero__coords">43°18′ N · 1°54′ O <span class="dim">— Errenteria, Gipuzkoa</span></p>
+        <p class="mono status" data-status><span class="status__dot"></span><span data-status-text>Lun–Vie · 08–13 / 15–19</span></p>
+      </div>
+
+      <div class="hero__stage wrap">
+        <h1 class="hero__title" id="hero-title">
+          <span class="line"><span class="line__in">Encontramos</span></span>
+          <span class="line line--indent"><span class="line__in">la avería.</span></span>
+          <span class="line line--right"><span class="line__in">La arreglamos.</span></span>
+        </h1>
+
+        <div class="signal signal--hero" aria-hidden="true">
+          <svg class="signal__svg" preserveAspectRatio="none" data-signal="hero">
+            <path class="signal__grid" d=""></path>
+            <path class="signal__trace" d=""></path>
+          </svg>
+          <span class="signal__label signal__label--a mono">Entrada · ruido</span>
+          <span class="signal__label signal__label--b mono">Salida · señal</span>
+        </div>
+      </div>
+
+      <div class="hero__foot wrap">
+        <p class="hero__lead">
+          Taller de <strong>mecánica, electricidad y electrónica del automóvil</strong> en el polígono Masti-Loidi, Errenteria. Diagnosticamos con datos, te explicamos qué tiene tu coche y lo reparamos.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="#reserva" data-magnet>
+            Reservar cita <span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn--ghost btn--lg" href="tel:+34943010950">
+            Llamar · 943 01 09 50
+          </a>
+        </div>
+        <ul class="hero__proof mono" role="list">
+          <li><b>4,6</b>/5 valoración media de clientes</li>
+          <li>Diagnosis electrónica</li>
+          <li>Pol. Masti-Loidi 15</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ TICKER ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Mecánica general</span><i>/</i><span>Electricidad</span><i>/</i><span>Electrónica y diagnosis</span><i>/</i><span>Inyección electrónica</span><i>/</i><span>Aire acondicionado</span><i>/</i>
+        <span>Mecánica general</span><i>/</i><span>Electricidad</span><i>/</i><span>Electrónica y diagnosis</span><i>/</i><span>Inyección electrónica</span><i>/</i><span>Aire acondicionado</span><i>/</i>
+      </div>
+    </div>
+
+    <!-- ============ SERVICIOS ============ -->
+    <section class="services" id="servicios" aria-labelledby="srv-title">
+      <div class="wrap services__head">
+        <p class="mono kicker"><span class="tick"></span>Canales · 05</p>
+        <h2 class="h2" id="srv-title" data-reveal>Cada avería tiene<br><em>su señal.</em></h2>
+        <p class="services__intro" data-reveal>Cinco especialidades, un mismo método: medir antes de cambiar piezas. Elige qué le pasa a tu coche y te reservamos hueco.</p>
+      </div>
+
+      <ol class="channels" role="list">
+        <li class="ch" data-reveal>
+          <a class="ch__link" href="#reserva" data-service="Mecánica general">
+            <span class="ch__num mono">CH·01</span>
+            <span class="ch__name">Mecánica general</span>
+            <span class="ch__desc">Mantenimiento, revisiones y reparación mecánica. Lo que el coche necesita para seguir funcionando bien.</span>
+            <svg class="ch__wave" viewBox="0 0 120 40" aria-hidden="true"><path d="M0 20 C10 4 20 4 30 20 S50 36 60 20 S80 4 90 20 S110 36 120 20"/></svg>
+            <span class="ch__go" aria-hidden="true">Pedir cita →</span>
+          </a>
+        </li>
+        <li class="ch" data-reveal>
+          <a class="ch__link" href="#reserva" data-service="Electricidad del automóvil">
+            <span class="ch__num mono">CH·02</span>
+            <span class="ch__name">Electricidad</span>
+            <span class="ch__desc">Arranque, carga, batería y alumbrado. Cuando el coche no arranca o algo eléctrico falla.</span>
+            <svg class="ch__wave" viewBox="0 0 120 40" aria-hidden="true"><path d="M0 30 H15 V10 H35 V30 H55 V10 H75 V30 H95 V10 H120"/></svg>
+            <span class="ch__go" aria-hidden="true">Pedir cita →</span>
+          </a>
+        </li>
+        <li class="ch" data-reveal>
+          <a class="ch__link" href="#reserva" data-service="Electrónica y diagnosis">
+            <span class="ch__num mono">CH·03</span>
+            <span class="ch__name">Electrónica y diagnosis</span>
+            <span class="ch__desc">Lectura de averías y testigos encendidos en el cuadro. Primero el dato, luego la reparación.</span>
+            <svg class="ch__wave" viewBox="0 0 120 40" aria-hidden="true"><path d="M0 24 L12 18 L20 28 L28 8 L36 32 L44 14 L52 22 L60 20 L120 20"/></svg>
+            <span class="ch__go" aria-hidden="true">Pedir cita →</span>
+          </a>
+        </li>
+        <li class="ch" data-reveal>
+          <a class="ch__link" href="#reserva" data-service="Inyección electrónica">
+            <span class="ch__num mono">CH·04</span>
+            <span class="ch__name">Inyección electrónica</span>
+            <span class="ch__desc">Tirones, consumo alto o pérdida de potencia. Revisamos el sistema de inyección.</span>
+            <svg class="ch__wave" viewBox="0 0 120 40" aria-hidden="true"><path d="M0 30 H18 L20 6 L22 30 H48 L50 6 L52 30 H78 L80 6 L82 30 H108 L110 6 L112 30 H120"/></svg>
+            <span class="ch__go" aria-hidden="true">Pedir cita →</span>
+          </a>
+        </li>
+        <li class="ch" data-reveal>
+          <a class="ch__link" href="#reserva" data-service="Aire acondicionado">
+            <span class="ch__num mono">CH·05</span>
+            <span class="ch__name">Aire acondicionado</span>
+            <span class="ch__desc">El aire ya no enfría como antes. Revisión del circuito y carga.</span>
+            <svg class="ch__wave" viewBox="0 0 120 40" aria-hidden="true"><path d="M0 20 C20 20 20 6 40 6 S60 34 80 34 S100 20 120 20"/></svg>
+            <span class="ch__go" aria-hidden="true">Pedir cita →</span>
+          </a>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ MÉTODO ============ -->
+    <section class="method" id="metodo" aria-labelledby="met-title">
+      <div class="wrap method__grid">
+        <div class="method__aside">
+          <div class="method__sticky">
+            <p class="mono kicker"><span class="tick"></span>Método</p>
+            <h2 class="h2" id="met-title" data-reveal>Del ruido<br>a la señal.</h2>
+            <p class="method__note" data-reveal>Llegas con un síntoma. Te vas sabiendo qué tenía tu coche y qué hemos hecho.</p>
+            <div class="gauge" aria-hidden="true"><span data-gauge></span></div>
+          </div>
+        </div>
+
+        <ol class="steps" role="list">
+          <li class="step" data-reveal data-step>
+            <span class="step__n">01</span>
+            <div>
+              <h3 class="h3">Escuchar</h3>
+              <p>Nos cuentas qué notas: un ruido, un testigo, un tirón, un consumo raro. Cuanto más concreto, más rápido.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal data-step>
+            <span class="step__n">02</span>
+            <div>
+              <h3 class="h3">Medir</h3>
+              <p>Diagnosis con equipo electrónico y comprobación en el coche. Datos antes que suposiciones.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal data-step>
+            <span class="step__n">03</span>
+            <div>
+              <h3 class="h3">Explicar</h3>
+              <p>Te decimos qué tiene y cuánto cuesta. Con presupuesto, antes de tocar nada.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal data-step>
+            <span class="step__n">04</span>
+            <div>
+              <h3 class="h3">Reparar</h3>
+              <p>Reparamos lo que hace falta. Ni más, ni menos. Y te lo devolvemos listo para la carretera.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ LECTURA (dark) ============ -->
+    <section class="readout" id="taller" aria-labelledby="read-title">
+      <div class="wrap">
+        <div class="readout__top">
+          <p class="mono kicker kicker--inv"><span class="tick"></span>Lectura del taller</p>
+          <h2 class="h2" id="read-title" data-reveal>Un taller de barrio<br>con <em>precisión de laboratorio.</em></h2>
+        </div>
+
+        <div class="readout__grid">
+          <div class="metric metric--xl" data-reveal>
+            <span class="metric__v"><span data-count="4.6" data-decimals="1">4,6</span><small>/5</small></span>
+            <span class="metric__l mono">Valoración media en opiniones de clientes</span>
+          </div>
+          <div class="metric" data-reveal>
+            <span class="metric__v"><span data-count="5">5</span></span>
+            <span class="metric__l mono">Especialidades bajo el mismo techo</span>
+          </div>
+          <div class="metric" data-reveal>
+            <span class="metric__v metric__v--days">L<span class="metric__dash">–</span>V</span>
+            <span class="metric__l mono">Mañana y tarde · 08–13 / 15–19</span>
+          </div>
+          <blockquote class="readout__quote" data-reveal>
+            <p>Lo que más repiten quienes ya han pasado por el taller: <em>la calidad del trabajo</em> y el uso de <em>piezas originales</em>.</p>
+            <footer class="mono">— Resumen de opiniones públicas de clientes</footer>
+          </blockquote>
+        </div>
+
+        <div class="signal signal--flat" aria-hidden="true">
+          <svg class="signal__svg" preserveAspectRatio="none" data-signal="clean">
+            <path class="signal__grid" d=""></path>
+            <path class="signal__trace" d=""></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ UBICACIÓN + HORARIO ============ -->
+    <section class="place" id="horario" aria-labelledby="place-title">
+      <div class="wrap place__grid">
+        <div class="place__addr">
+          <p class="mono kicker"><span class="tick"></span>Dónde estamos</p>
+          <h2 class="place__big" id="place-title" data-stretch>
+            <span>Masti-</span><span>Loidi</span><span class="place__no">15</span>
+          </h2>
+          <p class="place__sub">Polígono Masti-Loidi · 20100 Errenteria, Gipuzkoa</p>
+          <div class="place__actions">
+            <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&query=Garaje+Masti+Motor+Masti-Loidi+15+Errenteria" target="_blank" rel="noopener">Cómo llegar ↗</a>
+            <a class="btn btn--ghost" href="tel:+34943010950">943 01 09 50</a>
+          </div>
+        </div>
+
+        <div class="place__side">
+          <figure class="target" aria-hidden="true">
+            <svg viewBox="0 0 400 400">
+              <g class="target__rings">
+                <circle cx="200" cy="200" r="60"/><circle cx="200" cy="200" r="120"/><circle cx="200" cy="200" r="180"/>
+              </g>
+              <path class="target__axis" d="M200 0 V400 M0 200 H400"/>
+              <path class="target__road" d="M-10 300 C 90 280 140 210 200 200 S 330 120 410 96"/>
+              <path class="target__road target__road--b" d="M120 -10 C 150 90 170 150 200 200 S 250 330 236 410"/>
+              <circle class="target__pin" cx="200" cy="200" r="7"/>
+              <circle class="target__pulse" cx="200" cy="200" r="7"/>
+            </svg>
+            <figcaption class="mono">MM · 43°18′N 1°54′O · esquema, no a escala</figcaption>
+          </figure>
+
+          <div class="hours">
+            <div class="hours__head">
+              <h3 class="mono">Horario</h3>
+              <p class="mono status" data-status><span class="status__dot"></span><span data-status-text>Consultando…</span></p>
+            </div>
+            <table class="hours__table">
+              <caption class="sr">Horario de apertura</caption>
+              <tbody>
+                <tr data-day="1"><th scope="row">Lunes</th><td>08:00–13:00</td><td>15:00–19:00</td></tr>
+                <tr data-day="2"><th scope="row">Martes</th><td>08:00–13:00</td><td>15:00–19:00</td></tr>
+                <tr data-day="3"><th scope="row">Miércoles</th><td>08:00–13:00</td><td>15:00–19:00</td></tr>
+                <tr data-day="4"><th scope="row">Jueves</th><td>08:00–13:00</td><td>15:00–19:00</td></tr>
+                <tr data-day="5"><th scope="row">Viernes</th><td>08:00–13:00</td><td>15:00–19:00</td></tr>
+                <tr data-day="6" class="is-closed"><th scope="row">Sábado</th><td colspan="2">Cerrado</td></tr>
+                <tr data-day="0" class="is-closed"><th scope="row">Domingo</th><td colspan="2">Cerrado</td></tr>
+              </tbody>
+            </table>
+            <p class="hours__note">Horario habitual. Festivos y vacaciones pueden variar: si dudas, llama.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RESERVA ============ -->
+    <section class="book" id="reserva" aria-labelledby="book-title">
+      <div class="wrap book__grid">
+        <div class="book__intro">
+          <p class="mono kicker kicker--inv"><span class="tick"></span>Reservar cita</p>
+          <h2 class="h2" id="book-title">Cuéntanos qué<br>le pasa. <em>Nosotros<br>lo medimos.</em></h2>
+          <p class="book__p">Rellena los datos y te confirmamos el día por teléfono en horario de taller.</p>
+          <div class="book__call">
+            <p class="mono">¿Es urgente?</p>
+            <a class="book__tel" href="tel:+34943010950">943 01 09 50</a>
+          </div>
+        </div>
+
+        <form class="form" data-form novalidate>
+          <div class="form__row form__row--2">
+            <div class="field">
+              <label for="f-name">Nombre</label>
+              <input id="f-name" name="nombre" type="text" autocomplete="name" required>
+              <p class="field__err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="f-tel">Teléfono</label>
+              <input id="f-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" required pattern="[0-9 +]{9,15}">
+              <p class="field__err" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="form__row form__row--2">
+            <div class="field field--plate">
+              <label for="f-plate">Matrícula <span class="opt">opcional</span></label>
+              <div class="plate">
+                <span class="plate__eu" aria-hidden="true">E</span>
+                <input id="f-plate" name="matricula" type="text" autocomplete="off" autocapitalize="characters" maxlength="10" placeholder="0000 XXX" spellcheck="false">
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-car">Marca y modelo <span class="opt">opcional</span></label>
+              <input id="f-car" name="vehiculo" type="text" placeholder="Ej. Seat León 2016">
+            </div>
+          </div>
+
+          <fieldset class="field chips">
+            <legend>¿Qué necesitas?</legend>
+            <div class="chips__set">
+              <label class="chip"><input type="radio" name="servicio" value="Mecánica general" required><span>Mecánica</span></label>
+              <label class="chip"><input type="radio" name="servicio" value="Electricidad del automóvil"><span>Electricidad</span></label>
+              <label class="chip"><input type="radio" name="servicio" value="Electrónica y diagnosis"><span>Diagnosis</span></label>
+              <label class="chip"><input type="radio" name="servicio" value="Inyección electrónica"><span>Inyección</span></label>
+              <label class="chip"><input type="radio" name="servicio" value="Aire acondicionado"><span>Aire acond.</span></label>
+              <label class="chip"><input type="radio" name="servicio" value="Revisión / no lo sé"><span>No lo sé</span></label>
+            </div>
+            <p class="field__err" aria-live="polite"></p>
+          </fieldset>
+
+          <div class="form__row form__row--2">
+            <div class="field">
+              <label for="f-date">Día preferido <span class="opt">opcional</span></label>
+              <input id="f-date" name="fecha" type="date">
+            </div>
+            <div class="field">
+              <label for="f-time">Franja <span class="opt">opcional</span></label>
+              <select id="f-time" name="franja">
+                <option value="">Me da igual</option>
+                <option>Mañana (08–13)</option>
+                <option>Tarde (15–19)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-msg">¿Qué notas? <span class="opt">opcional</span></label>
+            <textarea id="f-msg" name="mensaje" rows="3" placeholder="Ruido al frenar, testigo del motor encendido, el aire no enfría…"></textarea>
+          </div>
+
+          <div class="form__send">
+            <button class="btn btn--signal btn--lg btn--block" type="submit" data-magnet>
+              Solicitar cita <span class="btn__arrow" aria-hidden="true">→</span>
+            </button>
+            <p class="form__legal">Usaremos tus datos solo para gestionar la cita. Al enviar se abrirá tu correo con la solicitud preparada.</p>
+          </div>
+
+          <div class="form__done" hidden data-done tabindex="-1">
+            <p class="mono">Solicitud preparada</p>
+            <p class="form__done-t">Envía el correo que se ha abierto y te llamamos para confirmar.</p>
+            <p>¿No se ha abierto tu correo? Llámanos al <a href="tel:+34943010950">943 01 09 50</a>.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="ftr">
+    <div class="wrap">
+      <div class="ftr__cols">
+        <div>
+          <p class="mono dim">Garaje Masti Motor</p>
+          <p>Pol. Masti-Loidi 15<br>20100 Errenteria, Gipuzkoa</p>
+        </div>
+        <div>
+          <p class="mono dim">Contacto</p>
+          <p><a href="tel:+34943010950">943 01 09 50</a><br><a href="mailto:mastimotor@yahoo.es">mastimotor@yahoo.es</a></p>
+        </div>
+        <div>
+          <p class="mono dim">Horario</p>
+          <p>Lun–Vie · 08–13 / 15–19<br>Sáb–Dom · Cerrado</p>
+        </div>
+        <div class="ftr__up">
+          <a class="mono" href="#top">Volver arriba ↑</a>
+        </div>
+      </div>
+      <p class="ftr__word" aria-hidden="true">Masti Motor</p>
+      <div class="ftr__base mono">
+        <span>© <span data-year>2026</span> Garaje Masti Motor</span>
+        <span>Mecánica · Electricidad · Electrónica · Inyección · A/A</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile action bar -->
+  <div class="dock" data-dock aria-label="Acciones rápidas">
+    <a class="dock__call" href="tel:+34943010950">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="currentColor"/></svg>
+      Llamar
+    </a>
+    <a class="dock__book" href="#reserva">Reservar cita →</a>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

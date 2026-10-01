@@ -482,7 +482,9 @@
           </div>
         </div>
 
-        <form class="form" data-form novalidate>
+        <!-- data-endpoint: URL de la aplicación web de Apps Script (ver automatizacion/GUIA.md). Vacío = se abre el correo. -->
+        <form class="form" data-form data-endpoint="" novalidate>
+          <p class="sr" aria-hidden="true"><label>No rellenar <input type="text" name="web" tabindex="-1" autocomplete="off"></label></p>
           <div class="form__row form__row--2">
             <div class="field">
               <label for="f-name">Nombre</label>
@@ -547,13 +549,13 @@
             <button class="btn btn--signal btn--lg btn--block" type="submit" data-magnet>
               Solicitar cita <span class="btn__arrow" aria-hidden="true">→</span>
             </button>
-            <p class="form__legal">Usaremos tus datos solo para gestionar la cita. Al enviar se abrirá tu correo con la solicitud preparada.</p>
+            <p class="form__legal">Usaremos tus datos solo para gestionar la cita. Te llamaremos para confirmar.</p>
           </div>
 
           <div class="form__done" hidden data-done tabindex="-1">
-            <p class="mono">Solicitud preparada</p>
-            <p class="form__done-t">Envía el correo que se ha abierto y te llamamos para confirmar.</p>
-            <p>¿No se ha abierto tu correo? Llámanos al <a href="tel:+34943010950">943 01 09 50</a>.</p>
+            <p class="mono" data-done-k>Solicitud recibida</p>
+            <p class="form__done-t" data-done-t>Te llamamos en horario de taller para confirmar el día.</p>
+            <p data-done-p>¿Prisa? Llámanos al <a href="tel:+34943010950">943 01 09 50</a>.</p>
           </div>
         </form>
       </div>

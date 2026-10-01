@@ -42,7 +42,7 @@ Se toman como datos oficiales; no se añade nada que no figure ahí ni en la fac
 ## Pendiente de confirmar con el taller
 
 1. **Valoración**: el 4,6 y las 27 opiniones están escritos a mano en `index.html`; hay que actualizarlos si cambian en Google.
-2. **Formulario**: ahora abre el correo del cliente con la solicitud ya redactada (`mailto:`), sin backend. Para recibir las solicitudes directamente, conectar Formspree o similar en el `submit` de `js/main.js`.
+2. **Formulario y citas**: ver `automatizacion/guia.html`. El piloto (`automatizacion/citas.gs`, Google Apps Script) mete cada solicitud en Google Calendar como PENDIENTE, la guarda en una hoja y avisa por correo. Para activarlo, pegar la URL `/exec` en `data-endpoint` del formulario de `index.html`. Mientras esté vacío, el formulario abre el correo del cliente.
 3. **Fotografía**: no hay. La sustituye la ilustración de la nave. No usar capturas de Google Street View (tienen derechos).
 4. **Dominio**: añadir `<link rel="canonical">`, `og:url`, `og:image` y `sitemap.xml` cuando exista el dominio.
 5. **Textos legales**: aviso legal y política de privacidad (RGPD).

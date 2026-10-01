@@ -1,0 +1,599 @@
+<title>Piloto Masti Motor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una sola columna de lectura (~68ch) con piezas anchas puntuales: esquema, agenda de ejemplo y código. */
+:root {
+  --bg: #ECEAE4;          /* gris claro de la web */
+  --surface: #F6F5F1;
+  --fg: #18224C;          /* azul marino */
+  --fg-2: #3A4263;
+  --mute: #5A6078;
+  --line: rgba(24, 34, 76, .16);
+  --sign: #1F2C6C;        /* azul del rótulo */
+  --on-sign: #ECEAE4;
+  --yellow: #FFCC00;      /* amarillo del rótulo */
+  --on-yellow: #18224C;
+  --ok: #1E7A43;
+  --ok-bg: #DDEFE3;
+  --pend-bg: #FFF2B8;
+  --code-bg: #18224C;
+  --code-fg: #E6E8F0;
+  --f-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111833; --surface: #18214A; --fg: #ECEAE4; --fg-2: #C9CCD8; --mute: #9EA4BC;
+    --line: rgba(236, 234, 228, .14); --sign: #1F2C6C; --on-sign: #ECEAE4;
+    --yellow: #FFCC00; --on-yellow: #18224C; --ok: #6FD39A; --ok-bg: rgba(111, 211, 154, .14);
+    --pend-bg: rgba(255, 204, 0, .16); --code-bg: #0B1027; --code-fg: #E6E8F0; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111833; --surface: #18214A; --fg: #ECEAE4; --fg-2: #C9CCD8; --mute: #9EA4BC;
+  --line: rgba(236, 234, 228, .14); --sign: #1F2C6C; --on-sign: #ECEAE4;
+  --yellow: #FFCC00; --on-yellow: #18224C; --ok: #6FD39A; --ok-bg: rgba(111, 211, 154, .14);
+  --pend-bg: rgba(255, 204, 0, .16); --code-bg: #0B1027; --code-fg: #E6E8F0; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.page { max-width: 1040px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 80px; display: grid; gap: 72px; }
+.read { max-width: 68ch; }
+.page > *, .sec > *, .codebox { min-width: 0; }
+h1, h2, h3, p, ol, ul, pre { margin: 0; }
+h1, h2 { font-family: var(--f-display); text-wrap: balance; letter-spacing: -.02em; line-height: .95; }
+h2 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 700; font-variation-settings: "wdth" 76; }
+h3 { font-size: 1.2rem; font-weight: 650; line-height: 1.2; }
+.eyebrow { font-family: var(--f-mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+.sec { display: grid; gap: 22px; }
+.sec > header { display: grid; gap: 12px; }
+.lead { font-size: 1.12rem; color: var(--fg-2); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+
+/* Cabecera: el rótulo */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.badge { display: inline-grid; justify-items: center; padding: 6px 14px 7px; background: var(--sign); color: var(--yellow); box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 3px rgba(255, 204, 0, .4); text-transform: uppercase; font-weight: 800; font-variation-settings: "wdth" 125; line-height: 1; }
+.badge small { font-size: .55rem; letter-spacing: .32em; margin-right: -.32em; }
+.badge span { font-size: 1rem; }
+.hero { display: grid; gap: 22px; }
+.hero h1 { font-size: clamp(2.8rem, 9vw, 6.2rem); font-weight: 750; font-variation-settings: "wdth" 72; }
+.hero h1 em { font-style: normal; font-weight: 300; font-variation-settings: "wdth" 118; }
+.hero h1 mark { background: var(--yellow); color: var(--on-yellow); padding: 0 .06em; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip { font-family: var(--f-mono); font-size: .78rem; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--fg-2); }
+
+/* Esquema del sistema */
+.flow { display: grid; grid-template-columns: 1fr auto 1.1fr auto 1fr; gap: 14px; align-items: stretch; }
+.node { background: var(--surface); border: 1px solid var(--line); padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.node--sign { background: var(--sign); color: var(--on-sign); border-color: var(--sign); }
+.node--sign .eyebrow { color: var(--yellow); }
+.node p { font-size: .92rem; color: inherit; opacity: .85; }
+.node ul { padding-left: 1.1em; font-size: .92rem; }
+.arrow { display: grid; place-items: center; font-family: var(--f-mono); color: var(--mute); font-size: 1.3rem; }
+.flow-b { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 14px; margin-top: 14px; }
+.flow-note { font-size: .92rem; color: var(--mute); }
+
+/* Estados */
+.states { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.state { padding: 12px; border: 1px solid var(--line); background: var(--surface); display: grid; gap: 4px; }
+.state b { font-family: var(--f-mono); font-size: .8rem; letter-spacing: .06em; }
+.state span { font-size: .88rem; color: var(--fg-2); }
+.state--p b { background: var(--pend-bg); padding: 2px 6px; width: fit-content; }
+.state--c b { background: var(--ok-bg); color: var(--ok); padding: 2px 6px; width: fit-content; }
+.state--t b { background: var(--sign); color: var(--yellow); padding: 2px 6px; width: fit-content; }
+.state--l b { border: 1px solid var(--fg); padding: 1px 5px; width: fit-content; }
+
+/* Agenda de ejemplo */
+.agenda { border: 1px solid var(--line); background: var(--surface); }
+.agenda__head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.agenda__row { display: grid; grid-template-columns: 64px 1fr; border-bottom: 1px solid var(--line); }
+.agenda__row:last-child { border-bottom: 0; }
+.agenda__h { font-family: var(--f-mono); font-size: .8rem; color: var(--mute); padding: 12px 0 12px 16px; font-variant-numeric: tabular-nums; }
+.ev { margin: 8px 12px 8px 0; padding: 8px 12px; border-left: 4px solid var(--fg); font-size: .92rem; min-width: 0; }
+.ev b { font-family: var(--f-mono); font-size: .76rem; letter-spacing: .05em; }
+.ev--p { background: var(--pend-bg); border-left-color: var(--yellow); }
+.ev--c { background: var(--ok-bg); border-left-color: var(--ok); }
+.ev--t { background: var(--sign); color: var(--on-sign); border-left-color: var(--yellow); }
+.ev--t b { color: var(--yellow); }
+.empty { padding: 12px 0; color: var(--mute); font-size: .88rem; }
+
+/* Pasos */
+.steps { list-style: none; padding: 0; display: grid; gap: 0; counter-reset: s; }
+.step { display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding-block: 22px; border-top: 1px solid var(--line); }
+.step:last-child { border-bottom: 1px solid var(--line); }
+.step__n { font-family: var(--f-display); font-size: 2.6rem; font-weight: 300; font-variation-settings: "wdth" 62; line-height: .85; }
+.step__body { display: grid; gap: 8px; min-width: 0; }
+.who { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; width: fit-content; background: var(--yellow); color: var(--on-yellow); }
+.who--auto { background: transparent; border: 1px solid var(--line); color: var(--mute); }
+.step ol, .step ul { padding-left: 1.2em; color: var(--fg-2); display: grid; gap: 4px; }
+.path { font-family: var(--f-mono); font-size: .86rem; background: var(--surface); border: 1px solid var(--line); padding: 1px 6px; white-space: nowrap; }
+
+/* Frases */
+.phrases { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.phrase { display: grid; gap: 10px; padding: 16px; border: 1px solid var(--line); background: var(--surface); min-width: 0; }
+.phrase q { quotes: "«" "»"; font-size: 1.02rem; font-weight: 500; }
+.phrase .eyebrow { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+
+/* Botón copiar y código */
+.copy { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; padding: 6px 10px; min-height: 32px; border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; }
+.copy:hover { background: var(--yellow); color: var(--on-yellow); border-color: var(--yellow); }
+.copy.is-done { background: var(--ok-bg); color: var(--ok); border-color: transparent; }
+.codebox { background: var(--code-bg); color: var(--code-fg); border: 1px solid var(--line); }
+.codebox__bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid rgba(255, 255, 255, .12); }
+.codebox__bar span { font-family: var(--f-mono); font-size: .78rem; color: var(--yellow); }
+.codebox .copy { color: var(--code-fg); border-color: rgba(255, 255, 255, .25); }
+.codebox pre { overflow-x: auto; padding: 16px; font-family: var(--f-mono); font-size: .8rem; line-height: 1.55; max-height: 460px; }
+.codebox--short pre { max-height: none; white-space: pre-wrap; }
+
+/* Límites */
+.limits { display: grid; gap: 0; list-style: none; padding: 0; }
+.limits li { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding-block: 14px; border-top: 1px solid var(--line); }
+.limits li:last-child { border-bottom: 1px solid var(--line); }
+.limits b { font-weight: 650; }
+.limits span { color: var(--fg-2); }
+.foot { font-size: .9rem; color: var(--mute); }
+
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .page { gap: 56px; }
+  .flow, .flow-b { grid-template-columns: 1fr; }
+  .arrow { transform: rotate(90deg); height: 20px; }
+  .states { grid-template-columns: 1fr 1fr; }
+  .phrases { grid-template-columns: 1fr; }
+  .step { grid-template-columns: 40px 1fr; }
+  .step__n { font-size: 2rem; }
+  .limits li { grid-template-columns: 1fr; gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<main class="page">
+
+  <header class="hero">
+    <div class="top">
+      <span class="badge" aria-label="Garaje Masti Motor"><small>Garaje</small><span>Masti Motor</span></span>
+      <span class="eyebrow">Sistema de citas · gratis · Google + Gemini</span>
+    </div>
+    <h1>La agenda del taller,<br><em>se lleva</em> <mark>hablando.</mark></h1>
+    <p class="lead read">Un Gmail del taller, su Google Calendar como agenda y Gemini en el móvil para apuntar, consultar y mover coches por voz. Las citas que entran por la web caen solas en el calendario.</p>
+    <div class="facts">
+      <span class="chip">Coste: 0 €</span>
+      <span class="chip">Montaje: unos 30 min</span>
+      <span class="chip">Uso diario: voz desde el móvil</span>
+    </div>
+  </header>
+
+  <section class="sec" aria-labelledby="t-como">
+    <header>
+      <p class="eyebrow">Cómo funciona</p>
+      <h2 id="t-como">Dos entradas, una sola agenda</h2>
+    </header>
+
+    <div class="flow" role="group" aria-label="Entrada desde la web">
+      <div class="node">
+        <p class="eyebrow">Cliente</p>
+        <h3>Pide cita en la web</h3>
+        <p>Nombre, teléfono, matrícula, servicio y día preferido.</p>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="node node--sign">
+        <p class="eyebrow">Piloto automático</p>
+        <h3>Apps Script</h3>
+        <ul>
+          <li>Crea el evento <b>PENDIENTE</b> en amarillo</li>
+          <li>Guarda la fila en la hoja «Citas»</li>
+          <li>Manda un aviso al Gmail</li>
+        </ul>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="node">
+        <p class="eyebrow">Agenda</p>
+        <h3>Google Calendar</h3>
+        <p>Un evento por coche. Es la única fuente de verdad.</p>
+      </div>
+    </div>
+
+    <div class="flow-b" role="group" aria-label="Entrada por voz">
+      <div class="node">
+        <p class="eyebrow">Dueño del taller</p>
+        <h3>Habla al móvil</h3>
+        <p>«Apunta el León 1234ABC mañana a las 9…»</p>
+      </div>
+      <div class="arrow" aria-hidden="true">⇄</div>
+      <div class="node">
+        <p class="eyebrow">Recepcionista</p>
+        <h3>Gemini (gratis)</h3>
+        <p>Lee y escribe en el Calendar del Gmail del taller.</p>
+      </div>
+      <div class="arrow" aria-hidden="true">⇄</div>
+      <div class="node">
+        <p class="eyebrow">Agenda</p>
+        <h3>El mismo Calendar</h3>
+        <p>Lo que entra por la web y lo que se dicta, junto.</p>
+      </div>
+    </div>
+    <p class="flow-note read">Gemini no es el sistema; es la forma de hablarle. Si un día Gemini falla, la agenda sigue ahí y se usa a mano.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="t-estados">
+    <header>
+      <p class="eyebrow">Una regla, cuatro palabras</p>
+      <h2 id="t-estados">El estado va al principio del título</h2>
+      <p class="lead read">Así Gemini y cualquier persona entienden la agenda de un vistazo. Cambiar de estado es cambiar esa palabra.</p>
+    </header>
+    <div class="states">
+      <div class="state state--p"><b>PENDIENTE</b><span>Llegó por la web. Hay que llamar.</span></div>
+      <div class="state state--c"><b>CONFIRMADA</b><span>Cliente avisado. Viene ese día.</span></div>
+      <div class="state state--t"><b>EN TALLER</b><span>El coche está dentro.</span></div>
+      <div class="state state--l"><b>LISTO</b><span>Terminado. Avisar para recoger.</span></div>
+    </div>
+
+    <div class="agenda" aria-label="Ejemplo de un día en el calendario">
+      <div class="agenda__head">
+        <span class="eyebrow">Ejemplo · martes</span>
+        <span class="eyebrow">Formato: ESTADO · MATRÍCULA · COCHE · TRABAJO · CLIENTE</span>
+      </div>
+      <div class="agenda__row"><span class="agenda__h">08:00</span><div class="ev ev--t"><b>EN TALLER</b> · 4821KLM · Seat León · Frenos delanteros · Ane</div></div>
+      <div class="agenda__row"><span class="agenda__h">09:00</span><div class="ev ev--c"><b>CONFIRMADA</b> · 1290GHT · Renault Kangoo · Diagnosis testigo motor · Jon</div></div>
+      <div class="agenda__row"><span class="agenda__h">11:00</span><div class="empty">Libre</div></div>
+      <div class="agenda__row"><span class="agenda__h">15:00</span><div class="ev ev--p"><b>PENDIENTE</b> · 7734BCD · Peugeot 308 · Aire acondicionado · Mikel (web)</div></div>
+      <div class="agenda__row"><span class="agenda__h">17:00</span><div class="ev ev--c"><b>CONFIRMADA</b> · 3307JPR · Ford Transit · Revisión · Talleres Lur</div></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="t-montaje">
+    <header>
+      <p class="eyebrow">Montaje · una sola vez</p>
+      <h2 id="t-montaje">Seis pasos, en este orden</h2>
+      <p class="lead read">Los nombres de los menús pueden variar un poco según la versión de Google. Si algo no aparece igual, busca la palabra más parecida.</p>
+    </header>
+    <ol class="steps">
+      <li class="step">
+        <span class="step__n">1</span>
+        <div class="step__body">
+          <span class="who">Lo haces tú</span>
+          <h3>Crear el Gmail del taller</h3>
+          <ul>
+            <li>En <span class="path">accounts.google.com/signup</span>, elige «Para mi negocio» o «Para mí».</li>
+            <li>Algo fácil de dictar: <b>garajemastimotor@gmail.com</b> si está libre.</li>
+            <li>Verifica con el móvil del dueño. Apunta la contraseña en un sitio seguro.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step__n">2</span>
+        <div class="step__body">
+          <span class="who">Lo haces tú</span>
+          <h3>Gemini en el móvil del dueño, conectado al Calendar</h3>
+          <ul>
+            <li>Instala la app <b>Gemini</b> e inicia sesión con el Gmail del taller.</li>
+            <li>Activa las apps conectadas: <span class="path">Ajustes → Apps</span> y enciende <b>Google Calendar</b>, Gmail y Tareas.</li>
+            <li>Prueba: «¿Qué tengo mañana en el calendario?». Si responde con la agenda, está conectado.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step__n">3</span>
+        <div class="step__body">
+          <span class="who">Lo haces tú</span>
+          <h3>Crear la hoja y pegar el piloto</h3>
+          <ol>
+            <li>Con el Gmail del taller, crea una hoja en <span class="path">sheets.new</span> y llámala «Masti Motor · Citas».</li>
+            <li>Abre <span class="path">Extensiones → Apps Script</span>.</li>
+            <li>Borra lo que haya y pega el código de la sección «El piloto», más abajo. Guarda.</li>
+          </ol>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step__n">4</span>
+        <div class="step__body">
+          <span class="who">Lo haces tú</span>
+          <h3>Dar permisos y probar</h3>
+          <ol>
+            <li>Arriba, elige la función <b>probar</b> y pulsa <b>Ejecutar</b>.</li>
+            <li>Google pedirá permisos: <span class="path">Revisar permisos → cuenta del taller → Configuración avanzada → Ir a…</span> y permitir. Es normal: el script es vuestro.</li>
+            <li>Comprueba que aparecen un evento amarillo «PENDIENTE · 1234ABC…», una fila en la hoja y un correo. Borra el evento de prueba.</li>
+          </ol>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step__n">5</span>
+        <div class="step__body">
+          <span class="who">Lo haces tú</span>
+          <h3>Publicarlo como aplicación web</h3>
+          <ol>
+            <li><span class="path">Implementar → Nueva implementación → Aplicación web</span>.</li>
+            <li>Ejecutar como: <b>Yo</b>. Quién tiene acceso: <b>Cualquier usuario</b>.</li>
+            <li>Copia la URL que termina en <b>/exec</b>. Ábrela en el navegador: debe decir «Masti Motor OK».</li>
+          </ol>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step__n">6</span>
+        <div class="step__body">
+          <span class="who who--auto">Me la pasas y lo hago yo</span>
+          <h3>Conectar la web</h3>
+          <ul>
+            <li>La URL va en <span class="path">index.html</span>, en el formulario: <span class="path">data-endpoint="…/exec"</span>.</li>
+            <li>Desde ahí, cada solicitud de la web entra sola en el calendario. Si la URL falla, la web vuelve a abrir el correo como respaldo.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="sec" aria-labelledby="t-frases">
+    <header>
+      <p class="eyebrow">Uso diario</p>
+      <h2 id="t-frases">Lo que se le dice a Gemini</h2>
+      <p class="lead read">Siempre con el mismo orden: estado, matrícula, coche, trabajo, cliente. Después de cada orden, leer lo que Gemini responde antes de darlo por hecho.</p>
+    </header>
+    <div class="phrases">
+      <div class="phrase">
+        <p class="eyebrow">Apuntar un coche <button class="copy" type="button" data-copy>Copiar</button></p>
+        <q>Crea un evento mañana a las 9: CONFIRMADA · 4821KLM · Seat León · frenos delanteros · Ane 600 123 456.</q>
+      </div>
+      <div class="phrase">
+        <p class="eyebrow">Ver el día <button class="copy" type="button" data-copy>Copiar</button></p>
+        <q>¿Qué coches tengo mañana en el calendario? Dímelos por hora.</q>
+      </div>
+      <div class="phrase">
+        <p class="eyebrow">Revisar lo de la web <button class="copy" type="button" data-copy>Copiar</button></p>
+        <q>¿Qué eventos PENDIENTE tengo esta semana? Dame el teléfono de cada uno.</q>
+      </div>
+      <div class="phrase">
+        <p class="eyebrow">Confirmar <button class="copy" type="button" data-copy>Copiar</button></p>
+        <q>En el evento del 7734BCD, cambia PENDIENTE por CONFIRMADA.</q>
+      </div>
+      <div class="phrase">
+        <p class="eyebrow">Mover <button class="copy" type="button" data-copy>Copiar</button></p>
+        <q>Mueve el evento del 1290GHT al jueves a las 15:00.</q>
+      </div>
+      <div class="phrase">
+        <p class="eyebrow">Terminar <button class="copy" type="button" data-copy>Copiar</button></p>
+        <q>En el evento del 4821KLM, cambia EN TALLER por LISTO.</q>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="t-gem">
+    <header>
+      <p class="eyebrow">Opcional · recepcionista fijo</p>
+      <h2 id="t-gem">Un Gem con las reglas del taller</h2>
+      <p class="lead read">Un Gem es un Gemini con instrucciones guardadas. Se crea en <span class="path">gemini.google.com → Gems → Nuevo Gem</span> y se pega este texto. Si el Gem no consigue tocar el calendario, usa Gemini normal con las frases de arriba: el resultado es el mismo.</p>
+    </header>
+    <div class="codebox codebox--short">
+      <div class="codebox__bar"><span>Instrucciones del Gem «Recepción Masti Motor»</span><button class="copy" type="button" data-copy-target="gem">Copiar</button></div>
+<pre id="gem">Eres la recepción de Garaje Masti Motor, taller mecánico en Errenteria.
+Horario: lunes a viernes, 08:00–13:00 y 15:00–19:00. Sábados y domingos cerrado.
+
+Trabajas sobre mi Google Calendar. Cada coche es un evento.
+Título siempre así: ESTADO · MATRÍCULA · COCHE · TRABAJO · CLIENTE
+Estados posibles: PENDIENTE, CONFIRMADA, EN TALLER, LISTO.
+En la descripción pon el teléfono del cliente y lo que le pasa al coche.
+
+Reglas:
+- Si no digo la hora, usa 08:00 (mañana) o 15:00 (tarde) y duración de 1 hora.
+- Nunca pongas citas fuera del horario. Si lo pido, avísame.
+- Las matrículas en mayúsculas y sin espacios.
+- Antes de crear, mover o borrar, repíteme en una línea lo que vas a hacer.
+- Si te pregunto por un día, responde por hora y en una línea por coche.</pre>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="t-codigo">
+    <header>
+      <p class="eyebrow">El piloto</p>
+      <h2 id="t-codigo">Código para pegar en Apps Script</h2>
+      <p class="lead read">Se pega entero en el paso 3. No hay que tocar nada. Si un día queréis citas de 2 horas o cambiar la franja, se cambia arriba, en CONFIG.</p>
+    </header>
+    <div class="codebox">
+      <div class="codebox__bar"><span>citas.gs</span><button class="copy" type="button" data-copy-target="code">Copiar código</button></div>
+<pre id="code">/**
+ * MASTI MOTOR — Piloto automático de citas
+ * ----------------------------------------
+ * Recibe las solicitudes del formulario de la web y:
+ *   1. Las guarda en la hoja «Citas» (registro de coches).
+ *   2. Crea un evento AMARILLO «PENDIENTE» en Google Calendar.
+ *   3. Envía un aviso al Gmail del taller.
+ *
+ * Instalación: ver automatizacion/GUIA.md (10 minutos, gratis).
+ */
+
+const CONFIG = {
+  calendario: 'primary',      // calendario principal del Gmail del taller
+  duracionMin: 60,            // duración por defecto de la cita
+  horaManana: 8,              // franja «Mañana» → 08:00
+  horaTarde: 15,              // franja «Tarde»  → 15:00
+  zona: 'Europe/Madrid',
+};
+
+const COLUMNAS = ['Recibida', 'Estado', 'Día', 'Franja', 'Nombre', 'Teléfono',
+                  'Matrícula', 'Vehículo', 'Servicio', 'Qué nota', 'Evento'];
+
+/** Punto de entrada de la web (POST). */
+function doPost(e) {
+  const p = (e &amp;&amp; e.parameter) || {};
+  if (p.web) return ok_();                                   // trampa antispam
+  if (!p.nombre || !p.telefono) return ok_();                // datos mínimos
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const cita = limpiar_(p);
+    const evento = crearEvento_(cita);
+    guardarFila_(cita, evento);
+    avisar_(cita, evento);
+  } finally {
+    lock.releaseLock();
+  }
+  return ok_();
+}
+
+/** Comprobación desde el navegador: abre la URL y debe decir «Masti Motor OK». */
+function doGet() {
+  return ContentService.createTextOutput('Masti Motor OK');
+}
+
+function limpiar_(p) {
+  const t = v =&gt; String(v || '').trim().slice(0, 500);
+  return {
+    nombre: t(p.nombre),
+    telefono: t(p.telefono),
+    matricula: t(p.matricula).toUpperCase().replace(/\s+/g, ''),
+    vehiculo: t(p.vehiculo),
+    servicio: t(p.servicio) || 'Sin especificar',
+    fecha: t(p.fecha),            // AAAA-MM-DD o vacío
+    franja: t(p.franja),
+    mensaje: t(p.mensaje),
+  };
+}
+
+/** Día pedido, o el siguiente día laborable si no indica ninguno. */
+function diaCita_(cita) {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(cita.fecha)) {
+    const [y, m, d] = cita.fecha.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+  const d = new Date();
+  do { d.setDate(d.getDate() + 1); } while (d.getDay() === 0 || d.getDay() === 6);
+  return d;
+}
+
+function crearEvento_(cita) {
+  const cal = CONFIG.calendario === 'primary'
+    ? CalendarApp.getDefaultCalendar()
+    : CalendarApp.getCalendarById(CONFIG.calendario);
+
+  const dia = diaCita_(cita);
+  const titulo = ['PENDIENTE', cita.matricula || 'Sin matrícula', cita.vehiculo, cita.servicio, cita.nombre]
+    .filter(Boolean).join(' · ');
+  const descripcion = [
+    'Solicitud desde la web — LLAMAR PARA CONFIRMAR',
+    '',
+    `Cliente: ${cita.nombre}`,
+    `Teléfono: ${cita.telefono}`,
+    `Matrícula: ${cita.matricula || '—'}`,
+    `Vehículo: ${cita.vehiculo || '—'}`,
+    `Servicio: ${cita.servicio}`,
+    `Franja pedida: ${cita.franja || 'Me da igual'}${cita.fecha ? '' : ' (no indicó día)'}`,
+    `Qué nota: ${cita.mensaje || '—'}`,
+  ].join('\n');
+
+  let ev;
+  if (/Mañana|Tarde/.test(cita.franja)) {
+    const inicio = new Date(dia);
+    inicio.setHours(/Tarde/.test(cita.franja) ? CONFIG.horaTarde : CONFIG.horaManana, 0, 0, 0);
+    const fin = new Date(inicio.getTime() + CONFIG.duracionMin * 60000);
+    ev = cal.createEvent(titulo, inicio, fin, { description: descripcion });
+  } else {
+    ev = cal.createAllDayEvent(titulo, dia, { description: descripcion });
+  }
+  ev.setColor(CalendarApp.EventColor.YELLOW);
+  return ev;
+}
+
+function hoja_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sh = ss.getSheetByName('Citas');
+  if (!sh) {
+    sh = ss.insertSheet('Citas');
+    sh.appendRow(COLUMNAS);
+    sh.setFrozenRows(1);
+    sh.getRange(1, 1, 1, COLUMNAS.length).setFontWeight('bold').setBackground('#1F2C6C').setFontColor('#FFCC00');
+  }
+  return sh;
+}
+
+function guardarFila_(cita, ev) {
+  const f = d =&gt; Utilities.formatDate(d, CONFIG.zona, 'dd/MM/yyyy HH:mm');
+  hoja_().appendRow([
+    f(new Date()), 'Pendiente',
+    Utilities.formatDate(diaCita_(cita), CONFIG.zona, 'dd/MM/yyyy'),
+    cita.franja || 'Me da igual',
+    cita.nombre, "'" + cita.telefono, cita.matricula, cita.vehiculo,
+    cita.servicio, cita.mensaje, ev.getId(),
+  ]);
+}
+
+function avisar_(cita, ev) {
+  const yo = Session.getEffectiveUser().getEmail();
+  const dia = Utilities.formatDate(ev.getStartTime(), CONFIG.zona, 'EEEE dd/MM');
+  MailApp.sendEmail({
+    to: yo,
+    subject: `🔧 Nueva cita web: ${cita.matricula || cita.vehiculo || cita.nombre} · ${cita.servicio}`,
+    body: [
+      `${cita.nombre} pide cita para ${dia} (${cita.franja || 'sin franja'}).`,
+      '',
+      `Teléfono: ${cita.telefono}`,
+      `Matrícula: ${cita.matricula || '—'} · Vehículo: ${cita.vehiculo || '—'}`,
+      `Servicio: ${cita.servicio}`,
+      `Qué nota: ${cita.mensaje || '—'}`,
+      '',
+      'Ya está en el calendario en AMARILLO como PENDIENTE.',
+      'Llama al cliente y luego dile a Gemini: «Confirma la cita de ' + (cita.matricula || cita.nombre) + '».',
+    ].join('\n'),
+  });
+}
+
+function ok_() {
+  return ContentService.createTextOutput('ok');
+}
+
+/** Ejecutar UNA vez a mano desde el editor para dar permisos y probar. */
+function probar() {
+  doPost({ parameter: {
+    nombre: 'Prueba', telefono: '600000000', matricula: '1234ABC', vehiculo: 'Seat León',
+    servicio: 'Electrónica y diagnosis', fecha: '', franja: 'Mañana (08–13)', mensaje: 'Testigo motor encendido',
+  }});
+}</pre>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="t-limites">
+    <header>
+      <p class="eyebrow">Para que no haya sorpresas</p>
+      <h2 id="t-limites">Lo que hay que saber</h2>
+    </header>
+    <ul class="limits">
+      <li><b>Gemini se equivoca a veces</b><span>Puede entender mal una hora o una matrícula. Por eso repite lo que va a hacer: leerlo siempre antes de seguir.</span></li>
+      <li><b>Cambiar eventos por voz</b><span>Crear y consultar funciona bien. Si en algún momento no consigue editar un evento, se abre en Calendar y se cambia la palabra a mano: 10 segundos.</span></li>
+      <li><b>Las citas web no son definitivas</b><span>Entran como PENDIENTE. El cliente sabe que le llamaréis para confirmar, y la web lo dice así.</span></li>
+      <li><b>Límites gratis</b><span>Google permite unos 100 avisos por correo al día con una cuenta normal. Para un taller sobra.</span></li>
+      <li><b>Datos de clientes</b><span>Quedan en la cuenta del taller, en su Calendar y su hoja. Conviene poner una contraseña fuerte y activar la verificación en dos pasos.</span></li>
+    </ul>
+    <p class="foot read">Primera prueba recomendada: una semana usando solo el calendario y Gemini, sin la web. Si el dueño lo usa a diario, se conecta la web. Si no, se ajusta antes de añadir nada.</p>
+  </section>
+
+</main>
+
+<script>
+(() => {
+  const flash = (btn, ok) => {
+    const t = btn.textContent;
+    btn.textContent = ok ? 'Copiado' : 'Selecciona y copia';
+    btn.classList.toggle('is-done', ok);
+    setTimeout(() => { btn.textContent = t; btn.classList.remove('is-done'); }, 1600);
+  };
+  const selectText = el => {
+    const r = document.createRange(); r.selectNodeContents(el);
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+  };
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('[data-copy], [data-copy-target]');
+    if (!btn) return;
+    const el = btn.dataset.copyTarget
+      ? document.getElementById(btn.dataset.copyTarget)
+      : btn.closest('.phrase').querySelector('q');
+    const text = el.textContent;
+    try {
+      navigator.clipboard.writeText(text).then(() => flash(btn, true), () => { selectText(el); flash(btn, false); });
+    } catch (_) { selectText(el); flash(btn, false); }
+  });
+})();
+</script>

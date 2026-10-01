@@ -299,8 +299,9 @@
     if (input && input.type !== 'radio') input.setAttribute('aria-invalid', msg ? 'true' : 'false');
   }
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
+    if (form.web.value) return; // trampa antispam
     const name = form.nombre, tel = form.telefono;
     const service = form.querySelector('input[name="servicio"]:checked');
     let firstBad = null;
@@ -332,9 +333,31 @@
       `Qué nota: ${form.mensaje.value.trim() || '—'}`
     ];
     const subject = `Cita — ${service.value} — ${name.value.trim()}`;
-    location.href = `mailto:mastimotor@yahoo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
-
     const done = $('[data-done]', form);
+    const btn = $('button[type="submit"]', form);
+    const endpoint = form.dataset.endpoint;
+    let sent = false;
+
+    // Piloto automático: Apps Script crea la cita en Google Calendar + hoja + aviso por correo
+    if (endpoint) {
+      btn.disabled = true;
+      try {
+        const data = new URLSearchParams(new FormData(form));
+        data.set('servicio', service.value);
+        await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: data });
+        sent = true;
+      } catch (_) { /* sin red: cae al correo */ }
+      btn.disabled = false;
+    }
+
+    if (!sent) {
+      location.href = `mailto:mastimotor@yahoo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+      $('[data-done-k]', form).textContent = 'Solicitud preparada';
+      $('[data-done-t]', form).textContent = 'Envía el correo que se ha abierto y te llamamos para confirmar.';
+      $('[data-done-p]', form).innerHTML = '¿No se ha abierto tu correo? Llámanos al <a href="tel:+34943010950">943 01 09 50</a>.';
+    } else {
+      form.querySelectorAll('input:not([type=radio]), textarea, select').forEach(el => { if (el.name !== 'web') el.value = ''; });
+    }
     done.hidden = false;
     done.focus();
   });

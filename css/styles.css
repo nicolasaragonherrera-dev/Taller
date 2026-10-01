@@ -676,3 +676,71 @@ body.menu-open { overflow: hidden; }
 
 /* Ajustes finos */
 .metric__dash { display: inline-block; margin-inline: .06em; font-weight: 200; color: var(--inv-mute); }
+
+/* ---------- Nave 15: alzado ilustrado ---------- */
+.facade { padding-block: 0 var(--section); }
+.facade__head { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--s-5) var(--gutter); align-items: end; margin-bottom: var(--s-7); }
+.facade__head .kicker { grid-column: 1 / -1; }
+.facade__head .h2 { grid-column: 1 / span 6; }
+.facade__legend { grid-column: 8 / -1; display: grid; gap: var(--s-4); }
+.facade__legend li { display: grid; grid-template-columns: 2.25rem 1fr; gap: .75rem; padding-top: var(--s-3); border-top: 1px solid var(--line); }
+.facade__legend .mono { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--ink); color: var(--signal); font-size: .7rem; }
+.facade__legend b { font-weight: 600; }
+.facade__legend p { color: var(--ink-2); font-size: .95rem; }
+.facade__fig { display: grid; gap: var(--s-3); }
+.facade__fig figcaption { color: var(--mute); }
+.fac { width: 100%; height: auto; overflow: visible; }
+
+.fac-line { stroke: var(--ink); stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; }
+rect.fac-line, rect.fac-paper, rect.fac-white, rect.fac-glass { stroke: var(--ink); stroke-width: 2; }
+.fac-line--b { stroke-width: 3; }
+.fac-edge { stroke: var(--ink); stroke-width: 2; }
+.fac-thin { stroke: var(--ink); stroke-width: 1; fill: none; opacity: .45; }
+.fac-wall { fill: #F4F3EF; }
+.fac-corr { stroke: rgba(24,34,76,.28); stroke-width: 1.5; }
+.fac-corr--hi { stroke: rgba(255,255,255,.9); }
+.fac-slat { fill: #D9D7D0; }
+.fac-paper { fill: var(--paper); }
+.fac-white { fill: #FBFAF7; }
+.fac-glass { fill: #C9CCD6; }
+.fac-refl { stroke: rgba(255,255,255,.75); stroke-width: 3; }
+.fac-inside { fill: #DCDDE2; }
+.fac-lamp { fill: #fff; filter: drop-shadow(0 4px 6px rgba(255,255,255,.9)); }
+.fac-ink { fill: var(--ink); }
+.fac-yel { fill: var(--signal); }
+.fac-van { fill: #FBFAF7; stroke: var(--ink); stroke-width: 2; }
+.fac-wheel { fill: var(--ink); }
+.fac-hub { fill: #9FA3B5; }
+.fac-ground { stroke: var(--ink); stroke-width: 4; }
+.fac-road { stroke: var(--signal); stroke-width: 6; }
+.fac-dim { stroke: var(--mute); stroke-width: 1; fill: none; }
+.fac-mono, .fac-call text, .fac-board__h { font-family: var(--f-mono); font-size: 13px; letter-spacing: .12em; fill: var(--mute); }
+.fac-mono { paint-order: stroke; stroke: var(--paper); stroke-width: 10px; stroke-linejoin: round; }
+.fac-num { font-family: var(--f-sans); font-weight: 800; font-size: 44px; fill: var(--ink); }
+.fac-num--sm { font-size: 40px; }
+.fac-sign__bg { fill: var(--sign); }
+.fac-sign__frame { fill: none; stroke: rgba(255,204,0,.45); stroke-width: 2; }
+.fac-sign text { fill: var(--signal); font-family: var(--f-sans); font-weight: 800; font-variation-settings: "wdth" 125; }
+.fac-sign__t1 { font-size: 50px; }
+.fac-sign__t2 { font-size: 66px; }
+.fac-board__h { fill: var(--sign); font-weight: 500; font-size: 12px; }
+.fac-board__rows rect { fill: var(--signal); }
+.fac-board__t text { font-family: var(--f-sans); font-size: 13px; font-weight: 700; fill: var(--sign); }
+.fac-call path { stroke: var(--ink); stroke-width: 1.5; }
+.fac-call circle { fill: var(--ink); }
+.fac-call text { fill: var(--signal); font-size: 12px; letter-spacing: .04em; }
+
+.fac-shutter { transform: translateY(calc(var(--open, 1) * -262px)); }
+.js .facade__fig { --open: 0; }
+
+@media (max-width: 1100px) {
+  .facade__head .h2, .facade__legend { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .facade__fig { margin-inline: calc(var(--margin) * -1); }
+  .facade__fig figcaption { padding-inline: var(--margin); }
+  .fac-call { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .facade__fig { --open: 1; }
+}

@@ -19,6 +19,7 @@ Un coche llega con ruido (un síntoma) y sale con una señal limpia (diagnóstic
 - **Canales**: cada servicio es un canal (CH·01–05) con su propia forma de onda.
 - **Calibre**: marcas de medición (`.tick`, `.gauge`, regla del hero) y códigos en mono.
 - **El rótulo**: el logo de la cabecera y el bloque final del footer reproducen el rótulo real de la fachada (azul con letras amarillas, palo seco ancho y grueso).
+- **Nave 15 (alzado ilustrado)**: dibujo SVG propio de la fachada real, con el rótulo, la chapa ondulada, la ventana corrida, el portón y el panel de servicios. La persiana sube con el scroll y deja ver el taller. Sustituye a la fotografía, que no existe.
 - **Matrícula**: el campo de matrícula del formulario como componente propio.
 
 | Elemento | Valor |
@@ -40,6 +41,6 @@ Un coche llega con ruido (un síntoma) y sale con una señal limpia (diagnóstic
 
 1. **Teléfono, email, horario y valoración**: confirmar que siguen vigentes.
 2. **Formulario**: ahora abre el correo del cliente con la solicitud ya redactada (`mailto:`), sin backend. Para recibir las solicitudes directamente, conectar Formspree o similar en el `submit` de `js/main.js`.
-3. **Fotografía real del taller**: no hay fotos públicas utilizables. Tratamiento recomendado: detalles (manos, herramientas, equipo de diagnosis) en blanco y negro con mucho contraste, sin coches de catálogo.
+3. **Fotografía**: no hay. La sustituye la ilustración de la nave. No usar capturas de Google Street View (tienen derechos).
 4. **Dominio**: añadir `<link rel="canonical">`, `og:url`, `og:image` y `sitemap.xml` cuando exista el dominio.
 5. **Textos legales**: aviso legal y política de privacidad (RGPD).

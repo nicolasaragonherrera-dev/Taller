@@ -83,6 +83,7 @@
     bar.style.transform = `scaleX(${scrollP})`;
     updateMethod();
     updateStretch();
+    updateFacade();
   }
   addEventListener('scroll', onScroll, { passive: true });
 
@@ -149,6 +150,15 @@
     const r = stretch.getBoundingClientRect();
     const p = clamp(1 - (r.top + r.height / 2) / innerHeight, 0, 1);
     stretch.style.setProperty('--w', (62 + p * 40).toFixed(1));
+  }
+
+  /* ---------- Nave 15: la persiana sube con el scroll ---------- */
+  const facade = $('[data-facade]');
+  function updateFacade() {
+    if (!facade || reduced) return;
+    const r = facade.getBoundingClientRect();
+    const p = clamp((innerHeight * .85 - r.top) / (r.height * .7), 0, 1);
+    facade.style.setProperty('--open', (p * p * (3 - 2 * p)).toFixed(3));
   }
 
   /* ---------- Contadores ---------- */

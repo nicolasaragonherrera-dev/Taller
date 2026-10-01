@@ -29,17 +29,19 @@ Un coche llega con ruido (un síntoma) y sale con una señal limpia (diagnóstic
 | Grid | 12 columnas, márgenes y gutter fluidos con `clamp()` |
 | Movimiento | Easing `cubic-bezier(.2,.7,0,1)`; todo se desactiva con `prefers-reduced-motion` |
 
-## Datos del negocio usados (fuentes públicas: directorios de talleres)
+## Datos del negocio (fuente: ficha de Google y directorios que la replican)
 
-- Dirección: Polígono Masti-Loidi 15, 20100 Errenteria (Gipuzkoa)
+Se toman como datos oficiales; no se añade nada que no figure ahí ni en la fachada.
+
+- Dirección: Masti-Loidi Kalea 15, Polígono Masti-Loidi, 20100 Errenteria (Gipuzkoa)
 - Teléfono: 943 01 09 50 · Email: mastimotor@yahoo.es
-- Horario: L–V 08:00–13:00 y 15:00–19:00
-- Servicios: mecánica general, electricidad, electrónica, inyección electrónica, aire acondicionado. El panel Magneti Marelli de la fachada añade frenos, suspensión, dirección, escape, encendido y baterías.
-- Valoración: 4,6/5 (agregadores de opiniones)
+- Horario: L–V 08:00–13:00 y 15:00–19:00 · Sáb–Dom cerrado
+- Valoración: 4,6/5 con 27 opiniones en Google (lo que más destacan: calidad del trabajo y piezas originales)
+- Servicios: mecánica general, electricidad, electrónica, inyección electrónica, aire acondicionado. El panel de la fachada añade frenos, suspensión, dirección, escape, encendido y baterías.
 
 ## Pendiente de confirmar con el taller
 
-1. **Teléfono, email, horario y valoración**: confirmar que siguen vigentes.
+1. **Valoración**: el 4,6 y las 27 opiniones están escritos a mano en `index.html`; hay que actualizarlos si cambian en Google.
 2. **Formulario**: ahora abre el correo del cliente con la solicitud ya redactada (`mailto:`), sin backend. Para recibir las solicitudes directamente, conectar Formspree o similar en el `submit` de `js/main.js`.
 3. **Fotografía**: no hay. La sustituye la ilustración de la nave. No usar capturas de Google Street View (tienen derechos).
 4. **Dominio**: añadir `<link rel="canonical">`, `og:url`, `og:image` y `sitemap.xml` cuando exista el dominio.

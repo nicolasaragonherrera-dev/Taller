@@ -18,12 +18,13 @@ Un coche llega con ruido (un síntoma) y sale con una señal limpia (diagnóstic
 - **La Señal**: traza SVG generativa (`js/main.js → makeSignal`). Es ruidosa a la izquierda y limpia a la derecha, se calma con el scroll y reacciona al cursor.
 - **Canales**: cada servicio es un canal (CH·01–05) con su propia forma de onda.
 - **Calibre**: marcas de medición (`.tick`, `.gauge`, regla del hero) y códigos en mono.
+- **El rótulo**: el logo de la cabecera y el bloque final del footer reproducen el rótulo real de la fachada (azul con letras amarillas, palo seco ancho y grueso).
 - **Matrícula**: el campo de matrícula del formulario como componente propio.
 
 | Elemento | Valor |
 |---|---|
 | Tipografía | Archivo variable (eje de anchura 62–125) + JetBrains Mono, autoalojadas en `assets/fonts` |
-| Color | Hormigón `#ECEAE4` · Grafito `#121314` · Fósforo `#C8F43A` (solo sobre grafito o como fondo) |
+| Color | Tomado del rótulo de la fachada: gris claro `#ECEAE4` · azul marino `#18224C` (texto y fondos oscuros) · azul rótulo `#1F2C6C` · amarillo `#FFCC00` (sobre azul, o como fondo con texto azul) |
 | Grid | 12 columnas, márgenes y gutter fluidos con `clamp()` |
 | Movimiento | Easing `cubic-bezier(.2,.7,0,1)`; todo se desactiva con `prefers-reduced-motion` |
 
@@ -32,7 +33,7 @@ Un coche llega con ruido (un síntoma) y sale con una señal limpia (diagnóstic
 - Dirección: Polígono Masti-Loidi 15, 20100 Errenteria (Gipuzkoa)
 - Teléfono: 943 01 09 50 · Email: mastimotor@yahoo.es
 - Horario: L–V 08:00–13:00 y 15:00–19:00
-- Servicios: mecánica general, electricidad, electrónica, inyección electrónica, aire acondicionado
+- Servicios: mecánica general, electricidad, electrónica, inyección electrónica, aire acondicionado. El panel Magneti Marelli de la fachada añade frenos, suspensión, dirección, escape, encendido y baterías.
 - Valoración: 4,6/5 (agregadores de opiniones)
 
 ## Pendiente de confirmar con el taller

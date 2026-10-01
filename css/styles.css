@@ -23,15 +23,17 @@
   /* Color */
   --paper: #ECEAE4;
   --paper-2: #E3E0D8;
-  --ink: #121314;
-  --ink-2: #2B2D2F;
-  --mute: #5C5D5A;
-  --line: rgba(18, 19, 20, .16);
-  --line-strong: rgba(18, 19, 20, .9);
-  --signal: #C8F43A;          /* fósforo de osciloscopio: solo sobre grafito o como fondo */
-  --signal-ink: #121314;
-  --inv-mute: #9A9B97;
-  --inv-line: rgba(236, 234, 228, .14);
+  /* Paleta tomada del rótulo de la fachada: azul marino + letras doradas */
+  --ink: #18224C;             /* azul marino profundo: texto y superficies oscuras */
+  --ink-2: #3A4263;
+  --mute: #5A6078;
+  --sign: #1F2C6C;            /* azul del rótulo, más saturado: solo en el «rótulo» */
+  --line: rgba(24, 34, 76, .16);
+  --line-strong: rgba(24, 34, 76, .9);
+  --signal: #FFCC00;          /* amarillo del rótulo: sobre azul, o como fondo con texto azul */
+  --signal-ink: #18224C;
+  --inv-mute: #A4A9BE;
+  --inv-line: rgba(236, 234, 228, .16);
 
   /* Tipo */
   --f-sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -186,11 +188,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
   height: var(--hdr-h);
   max-width: var(--max); margin-inline: auto; padding-inline: var(--margin);
 }
-.logo { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; margin-right: auto; }
-.logo__mark { width: 30px; height: 30px; display: grid; place-items: center; background: var(--ink); color: var(--signal); border-radius: var(--r); }
-.logo__mark svg { width: 22px; }
-.logo__word { font-size: 1.15rem; font-weight: 400; font-variation-settings: "wdth" 120; letter-spacing: -.02em; text-transform: uppercase; }
-.logo__word b { font-weight: 800; font-variation-settings: "wdth" 70; margin-left: .15em; }
+.logo { display: inline-flex; text-decoration: none; margin-right: auto; }
+/* El rótulo de la fachada, en pequeño */
+.logo__badge {
+  display: grid; justify-items: center; gap: 1px;
+  padding: .3rem .7rem .35rem;
+  background: var(--sign); color: var(--signal);
+  border: 1px solid rgba(255,255,255,.12); border-radius: 1px;
+  box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 3px rgba(255,204,0,.35);
+  text-transform: uppercase; line-height: 1;
+  font-weight: 800; font-variation-settings: "wdth" 125;
+}
+.logo__badge small { font-size: .56rem; letter-spacing: .32em; margin-right: -.32em; }
+.logo__badge span { font-size: .95rem; letter-spacing: .02em; }
 
 .nav { display: flex; gap: var(--s-5); }
 .nav a { position: relative; text-decoration: none; font-size: .9rem; font-weight: 500; padding-block: .5rem; }
@@ -298,7 +308,7 @@ body.menu-open { overflow: hidden; }
 .is-loaded .hero__meta, .is-loaded .hero__foot, .is-loaded .signal--hero { opacity: 1; transition: opacity 1s var(--ease) .55s; }
 
 /* ---------- 6. Ticker ---------- */
-.ticker { background: var(--ink); color: var(--paper); overflow: hidden; padding-block: 1.1rem; border-block: 1px solid var(--ink); }
+.ticker { background: var(--sign); color: var(--paper); overflow: hidden; padding-block: 1.1rem; border-block: 1px solid var(--sign); }
 .ticker__track { display: flex; gap: 2rem; width: max-content; animation: tick 38s linear infinite; }
 .ticker span { font-size: clamp(1.1rem, 2vw, 1.6rem); font-weight: 500; font-variation-settings: "wdth" 110; letter-spacing: -.01em; white-space: nowrap; }
 .ticker i { font-style: normal; color: var(--signal); font-family: var(--f-mono); }
@@ -518,10 +528,17 @@ body.menu-open { overflow: hidden; }
 .ftr__cols a { text-decoration: none; }
 .ftr__cols a:hover { text-decoration: underline; }
 .ftr__up { text-align: right; }
+/* El rótulo, a escala de fachada */
+.ftr__sign {
+  background: var(--sign); color: var(--signal);
+  padding: clamp(1rem, 2.4vw, 2.25rem) clamp(1rem, 3vw, 3rem) clamp(1.1rem, 2.6vw, 2.5rem);
+  box-shadow: inset 0 0 0 6px var(--sign), inset 0 0 0 7px rgba(255,204,0,.4);
+  text-align: center; overflow: hidden;
+}
+.ftr__garaje { font-size: clamp(1rem, 3.4vw, 3.5rem); font-weight: 800; font-variation-settings: "wdth" 125; letter-spacing: .4em; margin-right: -.4em; text-transform: uppercase; line-height: 1; margin-bottom: .2em; }
 .ftr__word {
-  font-size: var(--fit, 20vw); font-weight: 800; line-height: .78; letter-spacing: -.045em;
-  font-variation-settings: "wdth" 62; text-transform: uppercase; white-space: nowrap;
-  border-top: 1px solid var(--line-strong); padding-top: .06em;
+  font-size: var(--fit, 9vw); font-weight: 800; line-height: .9; letter-spacing: .01em;
+  font-variation-settings: "wdth" 125; text-transform: uppercase; white-space: nowrap;
 }
 .ftr__base { display: flex; justify-content: space-between; gap: 1rem; padding-top: var(--s-5); color: var(--mute); flex-wrap: wrap; }
 
@@ -568,7 +585,7 @@ body.menu-open { overflow: hidden; }
   .menu-open .burger i:last-child { transform: translateY(-3.75px) rotate(-45deg); }
   .menu-open .hdr { background: var(--ink); color: var(--paper); }
   .menu-open .hdr__menu { border-color: var(--inv-line); }
-  .menu-open .logo__mark { background: var(--signal); color: var(--ink); }
+  .menu-open .logo__badge { box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 3px var(--signal); }
 
   /* Hero móvil: titular primero, acción inmediata, señal como separador */
   .hero { min-height: auto; padding-bottom: var(--s-5); grid-template-rows: auto auto auto; }
